@@ -223,7 +223,7 @@ func (c *Config) matchCronIpGroup() {
 			continue
 		}
 		id := match[1]
-		key := fmt.Sprintf("IKUAI_CRON_IP-GROUP_%s", id)
+		key := fmt.Sprintf("IKUAI_CRON_IP_GROUP_%s", id)
 		value := os.Getenv(key)
 		slice := strings.Split(value, "|")
 		cron := ""
