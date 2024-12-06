@@ -73,6 +73,28 @@ type StreamDomainAddResp struct {
 	CallResp
 }
 
+type IPGroupShowResp struct {
+	CallResp
+	Data struct {
+		Total int `json:"total"`
+		Data  []struct {
+			ID      int    `json:"id"`
+			Name    string `json:"name"`
+			IPGroup string `json:"ipgroup"`
+			Comment string `json:"comment"`
+			Time    string `json:"time"`
+		} `json:"data"`
+	} `json:"Data"`
+}
+
+type IPGroupDelResp struct {
+	CallResp
+}
+
+type IPGroupAddResp struct {
+	CallResp
+}
+
 type HomepageShowSysStatResp struct {
 	CallResp
 	Data struct {

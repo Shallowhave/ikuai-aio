@@ -33,6 +33,14 @@ func Run(c *config.Config) error {
 		}
 		logger(tag, "cron/interval: %s, skip start: %t, timezone: %s", i.Cron, c.IKuaiCronSkipStart, c.Timezone)
 	}
+	for n, i := range c.IKuaiCronIpGroupList {
+		tag := "updateIpGroup" + "-" + strconv.Itoa(n+1)
+		cron = setCron(cron, i.Cron, c.IKuaiCronSkipStart).Name(tag).Tag(tag)
+		if _, err := cron.Do(updateIpGroup, i, tag); err != nil {
+			logger("cron", "tag: %s, error: %v", tag, err)
+		}
+		logger(tag, "cron/interval: %s, skip start: %t, timezone: %s", i.Cron, c.IKuaiCronSkipStart, c.Timezone)
+	}
 
 	cron.RegisterEventListeners(
 		gocron.BeforeJobRuns(func(tag string) {

@@ -32,6 +32,7 @@ type Config struct {
 	IKuaiCronSkipStart        bool
 	IKuaiCronCustomISPList    []*IKuaiCronCustomISP
 	IKuaiCronStreamDomainList []*IKuaiCronStreamDomain
+	IKuaiCronIpGroupList      []*IKuaiCronIPGROUP
 	IKuaiExporterDisable      bool
 	IKuaiExporterListenAddr   string
 }
@@ -49,6 +50,13 @@ type IKuaiCronStreamDomain struct {
 	Url       []string
 	SrcAddr   string
 	Comment   string
+}
+
+type IKuaiCronIPGROUP struct {
+	Cron    string
+	Name    string
+	Url     []string
+	Comment string
 }
 
 var C *Config
@@ -202,5 +210,46 @@ func (c *Config) matchCronStreamDomain() {
 
 	for _, v := range m {
 		c.IKuaiCronStreamDomainList = append(c.IKuaiCronStreamDomainList, v)
+	}
+}
+
+func (c *Config) matchCronIpGroup() {
+	re := regexp.MustCompile(`IKUAI_CRON_IP-GROUP_(\d+)`)
+	m := map[string]*IKuaiCronIPGROUP{}
+	for _, env := range os.Environ() {
+		match := re.FindStringSubmatch(env)
+		if len(match) < 2 {
+			continue
+		}
+		id := match[1]
+		key := fmt.Sprintf("IKUAI_CRON_IP-GROUP_%s", id)
+		value := os.Getenv(key)
+		slice := strings.Split(value, "|")
+		cron := ""
+		name := ""
+		url := ""
+		comment := ""
+
+		if len(slice) < 3 {
+			continue
+		}
+		cron = slice[0]
+		name = slice[1]
+		url = slice[2]
+		if len(slice) > 3 {
+			comment = slice[3]
+		}
+		if _, exist := m[id]; !exist {
+			m[id] = &IKuaiCronIPGROUP{
+				Cron:    cron,
+				Name:    name,
+				Url:     strings.Split(url, ","),
+				Comment: comment,
+			}
+		}
+
+	}
+	for _, v := range m {
+		c.IKuaiCronIpGroupList = append(c.IKuaiCronIpGroupList, v)
 	}
 }
