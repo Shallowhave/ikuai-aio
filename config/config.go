@@ -215,7 +215,7 @@ func (c *Config) matchCronStreamDomain() {
 }
 
 func (c *Config) matchCronIpGroup() {
-	re := regexp.MustCompile(`IKUAI_CRON_IP-GROUP_(\d+)`)
+	re := regexp.MustCompile(`IKUAI_CRON_IP_GROUP_(\d+)`)
 	m := map[string]*IKuaiCronIPGROUP{}
 	for _, env := range os.Environ() {
 		match := re.FindStringSubmatch(env)
