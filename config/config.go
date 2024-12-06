@@ -106,6 +106,7 @@ func Load() *Config {
 
 	c.matchCronCustomISP()
 	c.matchCronStreamDomain()
+	c.matchCronIpGroup()
 
 	C = c
 

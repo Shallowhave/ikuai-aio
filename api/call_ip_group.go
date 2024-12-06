@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func (c *Client) IpGroupShow() (*IPGroupShowResp, error) {
+func (c *Client) IPGroupShow() (*IPGroupShowResp, error) {
 	req := &CallReq{
 		FuncName: "ipgroup",
 		Action:   "show",

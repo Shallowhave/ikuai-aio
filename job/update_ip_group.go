@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func updateIpGroup(c *config.IKuaiCronIPGROUP, tag string) error {
+func updateIPGroup(c *config.IKuaiCronIPGROUP, tag string) error {
 	var rows []string
 	start := time.Now()
 	for _, url := range c.Url {
@@ -27,7 +27,7 @@ func updateIpGroup(c *config.IKuaiCronIPGROUP, tag string) error {
 	if err := client.Login(); err != nil {
 		return err
 	}
-	ipGroupShowResp, err := client.IpGroupShow()
+	ipGroupShowResp, err := client.IPGroupShow()
 	if err != nil {
 		return err
 	}
