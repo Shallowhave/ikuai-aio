@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: nervebing/ikuai-aio
+  IMAGE_NAME: shallowhave/ikuai-aio
 
 jobs:
   build:
@@ -23,7 +23,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ${{ env.REGISTRY }}
-          username: ${{ github.repository_owner }}
+          username: shallowhave
           password: ${{ secrets.GH_PACKAGES_TOKEN }}
       - name: Build and Push
         uses: docker/build-push-action@v4
