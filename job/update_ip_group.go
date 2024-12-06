@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func updateIpGroup(c *config.IKuaiCronCustomISP, tag string) error {
+func updateIpGroup(c *config.IKuaiCronIPGROUP, tag string) error {
 	var rows []string
 	start := time.Now()
 	for _, url := range c.Url {
