@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   ikuai-aio:
-    image: ghcr.io/nervebing/ikuai-aio:latest
+    image: ghcr.io/shallowhave/ikuai-aio:latest
     container_name: ikuai-aio
     restart: always
     environment:
@@ -24,6 +24,8 @@ services:
       # 新增的数据会覆盖原同[运营商名称]数据
       IKUAI_CRON_CUSTOM_ISP_1: "8h|China|https://raw.githubusercontent.com/Hackl0us/GeoIP2-CN/release/CN-ip-cidr.txt|ikuai-aio"
       IKUAI_CRON_CUSTOM_ISP_2: "0 6 * * *|Telegram|https://xxx.com/a.txt,https://xxx.com/b.txt|ikuai-aio"
+      # 可选,多个任务用数字区分,周期/crontab格式|ip分组名称|IP集地址,支持逗号分隔|备注,可为空,默认 [ikuai-aio]
+      IKUAI_CRON_IP_GROUP_1: 8h|telegram|https://cdn.jsdelivr.net/gh/Loyalsoldier/geoip@release/text/telegram.txt|ikuai-aio
       # 可选,多个任务用数字区分,周期/crontab格式|线路,支持逗号分隔|域名集地址,支持逗号分隔|IP或IP段,可为空|备注,可为空,默认 [ikuai-aio]
       # 新增的数据会覆盖原[备注]数据
       IKUAI_CRON_STREAM_DOMAIN_1: "10m|wan2|https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/gfw.txt|192.168.1.10-192.168.1.20|ikuai-aio"
