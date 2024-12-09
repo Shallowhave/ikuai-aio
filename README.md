@@ -51,7 +51,7 @@
 
 ```shell
 mkdir ikuai-aio && cd ikuai-aio
-wget https://raw.githubusercontent.com/NERVEbing/ikuai-aio/master/deploy/docker-compose.yml
+wget https://raw.githubusercontent.com/shallowhave/ikuai-aio/master/deploy/docker-compose.yml
 # 确保根据实际情况修改 docker-compose.yml 后
 docker compose up -d
 ```
