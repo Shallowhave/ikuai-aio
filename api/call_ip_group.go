@@ -104,7 +104,7 @@ func (c *Client) IpGroupAdd(groupName string, addrPool []string, comment string)
 				"group_name": groupName,
 				"addr_pool":  strings.Join(slice, ","),
 				"comment":    comment,
-				"type":       "1",
+				"type":       "0",
 				"NewRow":     "true",
 			},
 		}
