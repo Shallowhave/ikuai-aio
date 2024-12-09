@@ -78,11 +78,12 @@ type IPGroupShowResp struct {
 	Data struct {
 		Total int `json:"total"`
 		Data  []struct {
-			ID      int    `json:"id"`
-			Name    string `json:"name"`
-			IPGroup string `json:"ipgroup"`
-			Comment string `json:"comment"`
-			Time    string `json:"time"`
+			ID       int    `json:"id"`
+			Type     int    `json:"type"`
+			AddrPool string `json:"addr_pool"`
+			IPGroup  string `json:"ipgroup"`
+			Comment  string `json:"comment"`
+			Time     string `json:"time"`
 		} `json:"data"`
 	} `json:"Data"`
 }

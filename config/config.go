@@ -32,7 +32,7 @@ type Config struct {
 	IKuaiCronSkipStart        bool
 	IKuaiCronCustomISPList    []*IKuaiCronCustomISP
 	IKuaiCronStreamDomainList []*IKuaiCronStreamDomain
-	IKuaiCronIpGroupList      []*IKuaiCronIPGROUP
+	IKuaiCronIPGroupList      []*IKuaiCronIPGROUP
 	IKuaiExporterDisable      bool
 	IKuaiExporterListenAddr   string
 }
@@ -251,6 +251,6 @@ func (c *Config) matchCronIpGroup() {
 
 	}
 	for _, v := range m {
-		c.IKuaiCronIpGroupList = append(c.IKuaiCronIpGroupList, v)
+		c.IKuaiCronIPGroupList = append(c.IKuaiCronIPGroupList, v)
 	}
 }

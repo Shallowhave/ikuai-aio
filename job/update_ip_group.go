@@ -33,7 +33,7 @@ func updateIPGroup(c *config.IKuaiCronIPGROUP, tag string) error {
 	}
 	var ids []int
 	for _, i := range ipGroupShowResp.Data.Data {
-		if i.Name == c.Name {
+		if i.IPGroup == c.Name {
 			ids = append(ids, i.ID)
 		}
 	}

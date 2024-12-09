@@ -72,12 +72,12 @@ func (c *Client) IpGroupDel(ids []int) error {
 	return nil
 }
 
-func (c *Client) IpGroupAdd(name string, ipGroupSlice []string, comment string) (int, error) {
+func (c *Client) IpGroupAdd(groupName string, addrPool []string, comment string) (int, error) {
 	m := map[string]bool{}
-	//if len(comment) == 0 {
-	//	comment = "ikuai-aio"
-	//}
-	for _, i := range ipGroupSlice {
+	if len(comment) == 0 {
+		comment = "ikuai-aio"
+	}
+	for _, i := range addrPool {
 		i = parseIPv4(i)
 		if len(i) == 0 {
 			continue
@@ -85,23 +85,27 @@ func (c *Client) IpGroupAdd(name string, ipGroupSlice []string, comment string) 
 		if _, exist := m[i]; !exist {
 			m[i] = false
 		}
+		comment = comment + ",%20" + comment
+
 	}
 
-	ipGroupSlice = make([]string, 0, len(m))
+	addrPool = make([]string, 0, len(m))
 	for row := range m {
-		ipGroupSlice = append(ipGroupSlice, row)
+		addrPool = append(addrPool, row)
 	}
 
 	chunkSize := 5000
-	ipGroupSlices := chunkSliceStr(ipGroupSlice, chunkSize)
+	ipGroupSlices := chunkSliceStr(addrPool, chunkSize)
 	for _, slice := range ipGroupSlices {
 		req := &CallReq{
 			FuncName: "ipgroup",
 			Action:   "add",
 			Param: map[string]string{
-				"name":    name,
-				"ipgroup": strings.Join(slice, ","),
-				"comment": comment,
+				"group_name": groupName,
+				"addr_pool":  strings.Join(slice, ","),
+				"comment":    comment,
+				"type":       "1",
+				"NewRow":     "true",
 			},
 		}
 
@@ -123,5 +127,5 @@ func (c *Client) IpGroupAdd(name string, ipGroupSlice []string, comment string) 
 		}
 	}
 
-	return len(ipGroupSlice), nil
+	return len(addrPool), nil
 }
